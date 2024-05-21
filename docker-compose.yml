@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  nginx0:
+    image: nginx:1.16
+    volumes:
+      - "./html/:/usr/share/nginx/html"
+      - "./nginx_data/conf_d:/etc/nginx/conf.d"
+      - "./nginx_data/logs:/var/log/nginx/"
+      - "./ssl:/etc/nginx/ssl"
+    restart: always
+    ports:
+      - "2235:80"
+      # - "443:443"
+    networks:
+      - loza_net
+
+  loza_server1:
+    image: sea5kg/loza-server:v1.0.0
+    volumes:
+      - "./docker_tmp_data/loza_server1_data/:/data"
+    restart: always
+    networks:
+      - loza_net
+networks:
+  loza_net:
+    driver: bridge

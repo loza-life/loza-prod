@@ -1,0 +1,3 @@
+/nginx_data/logs
+*.log
+/docker_tmp_data
